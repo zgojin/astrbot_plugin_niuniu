@@ -225,8 +225,8 @@ class NiuniuShop:
             yaml.dump(data, f, allow_unicode=True)
 
     def _load_sign_data(self) -> Dict[str, Any]:
-        """加载签到数据"""
-        sign_data_path = os.path.join('data', 'sign_data.yml')
+        """加载经济与契约数据"""
+        sign_data_path = os.path.join('data', 'plugins_WealthAndContract_data', 'WAC_data.yml')
         if not os.path.exists(sign_data_path):
             with open(sign_data_path, 'w', encoding='utf-8') as f:
                 yaml.dump({}, f)
@@ -234,18 +234,18 @@ class NiuniuShop:
             return yaml.safe_load(f) or {}
 
     def _save_sign_data(self, data: Dict[str, Any]):
-        """保存签到数据"""
-        sign_data_path = os.path.join('data', 'sign_data.yml')
+        """保存经济与契约数据"""
+        sign_data_path = os.path.join('data', 'plugins_WealthAndContract_data', 'WAC_data.yml')
         with open(sign_data_path, 'w', encoding='utf-8') as f:
             yaml.dump(data, f, allow_unicode=True)
 
     def get_sign_coins(self, group_id: str, user_id: str) -> float:
-        """获取签到插件的金币"""
+        """获取经济与契约插件的金币"""
         sign_data = self._load_sign_data()
         return sign_data.get(group_id, {}).get(user_id, {}).get('coins', 0.0)
 
     def update_sign_coins(self, group_id: str, user_id: str, coins: float):
-        """更新签到插件的金币"""
+        """更新经济与契约插件的金币"""
         sign_data = self._load_sign_data()
         user_data = sign_data.setdefault(group_id, {}).setdefault(user_id, {})
         user_data['coins'] = coins
